@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
   <meta charset="UTF-8">
+  <meta name="description" content="You got gapped by an Alistar, how do you feel?"> <!-- Add this line -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GGEZ FREE LP BOZO</title>
+  <title>Got Milked? 🍼 </title>
   <link rel="shortcut icon" type="image/jpg" href="horns.png"/>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,10 +19,9 @@
   <div class="wrapper">
     <video id="background-video" autoplay loop muted>
       <source src="ali2.mp4" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
     <div class="content">
-      <h1>ALISTAR GAPPED YOU</h1>
+      <h1>Alistar Gapped You.</h1>
       <div class="controls">
         <button id="enable-audio">Enable Audio</button>
         <div id="volume-control" class="hidden">
@@ -27,5 +34,125 @@
 </a>
 </div>
 <script src="script.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Updated styles for the modernized pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #6441A4; /* Purple background color, Twitch's primary color */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            max-width: 300px; /* Adjust the maximum width as needed */
+            color: #fff; /* Text color */
+        }
+
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff; /* Close button color */
+        }
+
+        h2 {
+            font-size: 24px; /* Larger font size for the title */
+            margin: 0;
+            color: #9147FF; /* Highlight color */
+        }
+
+        p {
+            font-size: 18px; /* Larger font size for the content */
+            margin: 10px 0;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #9147FF; /* Button color, Twitch's accent color */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #6441A4; /* Hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="popup" id="twitch-popup"> <!-- Add draggable attribute -->
+        <span class="close" id="close-popup" draggable="false">&times;</span> <!-- Set draggable to false for the close button -->
+        <h2> The 🐄 is on Twitch</h2>
+        <p>Moo-over to my gameplay!</p>
+        <a href="https://www.twitch.tv/epsiion" target="_blank">TTV.EPSILON</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const popup = document.getElementById("twitch-popup");
+            const closeBtn = document.getElementById("close-popup");
+
+            // Function to enable dragging
+            const enableDrag = (element) => {
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                if (document.getElementById(element.id)) {
+                    document.getElementById(element.id).onmousedown = dragMouseDown;
+                } else {
+                    element.onmousedown = dragMouseDown;
+                }
+
+                function dragMouseDown(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    document.onmousemove = elementDrag;
+                }
+
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    element.style.top = (element.offsetTop - pos2) + "px";
+                    element.style.left = (element.offsetLeft - pos1) + "px";
+                }
+
+                function closeDragElement() {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+
+            const isLive = true;
+
+            if (isLive) {
+                popup.style.display = "block";
+                enableDrag(popup); // Enable dragging for the pop-up
+            }
+
+            closeBtn.addEventListener("click", function() {
+                popup.style.display = "none";
+            });
+        });
+    </script>
 </body>
 </html>
